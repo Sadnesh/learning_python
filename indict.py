@@ -6,7 +6,7 @@ count:int=1
 def display_task():
     print(f"\n{"-"*35}\n{"Index":>6} | {"Status":12s} | {"Task":}\n{"+"*35}")
     for i,j in to_do_dic.items():
-         print(," | ",i," | ",j)
+         print(f"{i:>6} | {j[1]:20s} | {j[0]}")
     print("-"*35,"\n")
 
 # To add a task
@@ -21,26 +21,27 @@ def add_task():
 
 # To mark a task as completed
 def mark():
-    name = input("Please provide an task name.")
-    for name in to_do_dic.values():
-
-        if name == "\x1b[31mINCOMPLETED\x1b[m":
+    index = input("Please provide the index of the task.")
+    if value:=to_do_dic.get(index):
+        # value=to_do_dic.get(index)
+        if value[1]== "\x1b[31mINCOMPLETE\x1b[m":
             a = input("Still not completed, do you want to mark it as completed? y/n:\
 ->")
             if a == "y" or a == "Y":
-                name = "\x1b[32mCOMPLETED\x1b[m"
+                value[1] = "\x1b[32mCOMPLETED\x1b[m"
                 print("Successfully Completed")
             else:
                 print("Nothing changed")
         else:
             print("Already completed")
+    else:
+        print("The index isn't present")
 
 
 # To remove a task
-def remove_task(index):#del but i don't know how to use it
-    tasks=to_do_dic.keys()
-    if index in tasks:
-        print(f"Task {to_do_dic.pop(index)} removed successfully")
+def remove_task(index):
+    if index in to_do_dic.keys():
+        print(f"Task {to_do_dic.pop(index)[0]} removed successfully")
 
 
 # Menu
@@ -70,10 +71,9 @@ def menu():
             case 4:
                 display_task()
                 index = input(
-                        "Enter the task you want to remove:\n\
+                        "Enter the index of task you want to remove:\n\
 -> "
                     )
-                
                 remove_task(index)
             case 5:  # breaking the loop
                 break  # or return 0
