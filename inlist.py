@@ -1,14 +1,16 @@
 import time
+
 # To do using list
 to_do_list = []
 
 
 # To display a task
 def display_task():
-    print(f"\n{"-"*35}\n{"Index":>6} | {"Status":12s} | {"Task":}\n{"+"*35}")
+    print(f'\n{"-"*35}\n{"Index":>6} | {"Status":12s} | {"Task":}\n{"+"*35}')
     for i in range(len(to_do_list)):
         print(f"{i:>6} | {to_do_list[i][1]:20s} | {to_do_list[i][0]:}")
-    print("-"*35,"\n")
+    print("-" * 35, "\n")
+
 
 # To add a task
 def add_task():
@@ -19,8 +21,10 @@ def add_task():
 def mark():
     mark_choice = int(input("Please provide an index."))
     if to_do_list[mark_choice][1] == "\x1b[31mINCOMPLETED\x1b[m":
-        a = input("Still not completed, do you want to mark it as completed? y/n:\
-->")
+        a = input(
+            "Still not completed, do you want to mark it as completed? y/n:\
+->"
+        )
         if a == "y" or a == "Y":
             to_do_list[mark_choice][1] = "\x1b[32mCOMPLETED\x1b[m"
             print("Successfully Completed")
